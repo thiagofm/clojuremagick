@@ -1,6 +1,8 @@
-(ns clojuremagick.core)
+(ns clojuremagick.core
+  (:require [me.raynes.conch :refer [programs with-programs let-programs] :as sh]))
 
 (defn foo
-  "I don't do a whole lot."
+  "Working example"
   [x]
-  (println x "Hello, World!"))
+  (programs mogrify)
+  (mogrify "rose.jpg" {:in ["-resize" "50%"]}))
