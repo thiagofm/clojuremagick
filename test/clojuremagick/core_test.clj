@@ -1,7 +1,7 @@
 (ns clojuremagick.core-test
-  (:require [clojure.test :refer :all]
-            [clojuremagick.core :refer :all]))
+  (:require [clojuremagick.core :as cm]
+            [midje.sweet :as midje])
+  (:use midje.sweet))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(facts "about with-file"
+  (cm/with-file "rose_full.jpg" [[:resize "50x50"]]) => (clojure.java.io/file "rose_thumb.jpg"))

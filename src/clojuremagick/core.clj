@@ -1,8 +1,11 @@
 (ns clojuremagick.core
-  (:require [me.raynes.conch :refer [programs with-programs let-programs] :as sh]))
+  (:require [me.raynes.conch :refer [programs with-programs let-programs] :as sh]
+            [clojuremagick.command :as command]))
 
-(defn foo
+(defn with-file
   "Working example"
-  [x]
+  [file-arg command-vec]
   (programs mogrify)
-  (mogrify "rose.jpg" {:in ["-resize" "50%"]}))
+  (let [file file-arg
+        in (command/vec->in command-vec)]
+    (mogrify file {:in in})))
