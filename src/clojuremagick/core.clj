@@ -5,7 +5,8 @@
 (defn with-file
   "Working example"
   [file-arg command-vec]
-  (programs mogrify)
+  (programs mogrify pwd)
+  (print (pwd)) ;
   (let [file file-arg
         in (command/vec->in command-vec)]
     (mogrify file {:in in})))
