@@ -21,13 +21,14 @@ Why is it better than using shell command interface of imagemagic directly?
    [:rotate "-90"]
    [:flip]])
    
-; Convert a file -- keeping the old version
+; Convert a file -- keeping the old version. The new version will have the thumb_rotated_small prefix.
 (cm/with-copy file
+  :thumb-rotated-small
   [[:resize "250x200>"]
    [:rotate "-90"]
    [:flip]])
 
-; Convert a file with multiple outputs (will always keep the old version)
+; Convert a file with multiple outputs (will always keep the old version). The new version will have the prefix specified as the name of the version.
 (cm/with-copy
   file
   (cm/version
