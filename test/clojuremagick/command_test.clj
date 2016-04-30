@@ -4,4 +4,5 @@
   (:use midje.sweet))
 
 (facts "about vec->shell"
-       (command/vec->shell [[:resize "50%"]]) => ["-resize" "50%"])
+       (command/vec->shell [[:resize "50%"]]) => ["-resize" "50%"]
+       (command/vec->shell [[:flip]]) => ["-flip"])

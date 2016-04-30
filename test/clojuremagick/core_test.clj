@@ -1,16 +1,14 @@
 (ns clojuremagick.core-test
   (:require [clojuremagick.core :as cm]
             [midje.sweet :as midje])
+  (:use clojuremagick.support.checkers)
   (:use midje.sweet))
 
+(defn resources-path [file]
+  (str "test/resources/" file))
 
 ; TODO: write matchers to handle files
-(with-state-changes [(before :facts
-                             (do
-                               (def rose-temp-file (java.io.File/createTempFile "temp_rose" ".jpg"))
-                               (clojure.java.io/copy (clojure.java.io/file "test/resources/rose_full.jpg") rose-temp-file)))]
+(with-state-changes [(before :facts (do (def rose-temp-file (java.io.File/createTempFile "temp_rose" ".jpg"))
+                                        (clojure.java.io/copy (clojure.java.io/file (resources-path "rose_full.jpg")) rose-temp-file)))]
   (facts "about with-file"
-    (.length (cm/with-file (.toString rose-temp-file) [[:resize "100x100"]])) => (.length (clojure.java.io/file "test/resources/rose_thumb.jpg"))))
-;;
-
-;
+    (cm/with-file (.toString rose-temp-file) [[:resize "100x100"]]) => (filesize-matches? (clojure.java.io/file (resources-path "rose_thumb.jpg")))))
