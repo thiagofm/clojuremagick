@@ -4,7 +4,7 @@
   (:use midje.sweet))
 
 
-
+; TODO: write matchers to handle files
 (with-state-changes [(before :facts
                              (do
                                (def rose-temp-file (java.io.File/createTempFile "temp_rose" ".jpg"))

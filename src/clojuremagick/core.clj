@@ -3,10 +3,16 @@
             [clojuremagick.command :as command]))
 
 (defn with-file
-  "Working example"
+  "Given a file path and a vector command, runs the command in the file and returns a file with the new version"
   [file-arg command-vec]
-  (programs mogrify pwd)
-  (print (pwd)) ;
+  (programs mogrify)
   (let [file file-arg
-        in (command/vec->in command-vec)]
-    (mogrify file {:in in})))
+        ; Converting vectors to the expected format
+        shell (command/vec->shell command-vec)
+        shell-args (conj shell file)]
+
+    ; Run shell command
+    (apply mogrify shell-args)
+
+    ; Return file
+    (clojure.java.io/file file)))
