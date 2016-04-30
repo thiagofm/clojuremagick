@@ -1,7 +1,8 @@
 (ns clojuremagick.command)
 
-(defn vec->shell [command-vec]
+(defn vec->shell-vec
   "Converts vector to conch's shell format"
+  [command-vec]
   (vec (apply concat
           (map (fn [command]
                  (let [k (get command 0)
