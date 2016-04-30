@@ -16,7 +16,7 @@ Why is it better than using shell command interface of imagemagic directly?
 
 ```clojure
 ; Convert a single file -- WARNING: the file will be overriden
-(cm/with-file file 
+(cm/with-file file ; Either file path or clojure.java.io/File / java.io.File
   [[:resize "250x200>"]
    [:rotate "-90"]
    [:flip]])
