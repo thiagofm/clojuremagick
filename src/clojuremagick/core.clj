@@ -16,3 +16,10 @@
 
     ; Return file
     (clojure.java.io/file file-path)))
+
+(defn with-copy
+  [file-arg file-prefix command-vec]
+  (let [file-path (.toString file-arg)
+        file-name (org.apache.commons.io.FilenameUtils/getName file-path)
+        new-file-name (str file-prefix file-name)]
+    new-file-name))

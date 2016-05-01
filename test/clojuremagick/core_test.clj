@@ -8,7 +8,7 @@
   (str "test/resources/" file))
 
 ; TODO: refactor this and the other case
-(with-state-changes [(before :facts (do (def rose-temp-file (java.io.File/createTempFile "temp_rose" ".jpg")) ; TODO: improve this!
+(with-state-changes [(before :facts (do (def rose-temp-file (java.io.File/createTempFile "temp_rose" ".jpg")) ; todo: improve this!
                                         (clojure.java.io/copy (clojure.java.io/file (resources-path "rose_full.jpg")) rose-temp-file)))]
   (facts "about with-file"
          (cm/with-file (.toString rose-temp-file) [[:resize "100x100"]]) => (filesize-matches? (clojure.java.io/file (resources-path "rose_thumb.jpg")))))
@@ -20,3 +20,9 @@
 
 
 
+
+;
+(with-state-changes [(before :facts (do (def rose-temp-file (java.io.File/createTempFile "temp_rose" ".jpg")) ; todo: improve this!
+                                        (clojure.java.io/copy (clojure.java.io/file (resources-path "rose_full.jpg")) rose-temp-file)))]
+  (facts "about with-copy"
+         (cm/with-copy (.toString rose-temp-file) :thumb-rotated-small [[:resize "100x100"]]) => (filesize-matches? (clojure.java.io/file (resources-path "rose_thumb.jpg")))))
