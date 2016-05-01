@@ -19,7 +19,7 @@
 
 (defn with-tempfile
   [file-arg file-prefix command-vec]
-  (let [; TODO: extract most of those lets to functions inside file.clj
+  (let [; TODO: extract most of those defs to functions inside file.clj
         file-path (.toString file-arg)
         file-base-name (org.apache.commons.io.FilenameUtils/getBaseName file-path)
         file-extension (org.apache.commons.io.FilenameUtils/getExtension file-path)
@@ -30,3 +30,8 @@
     (clojure.java.io/copy (clojure.java.io/file file-path) temp-file)
 
     (with-file temp-file-path command-vec)))
+
+(def with-copy
+  [file-arg file-prefix command-vec]
+  (let [ (with-tempfile file-arg file-prefix command-vec)]
+    ))

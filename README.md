@@ -21,7 +21,14 @@ Why is it better than using shell command interface of imagemagic directly?
    [:rotate "-90"]
    [:flip]])
    
-; Convert a file -- keeping the old version. The new version will have the thumb_rotated_small prefix.
+; Convert a file -- keeping the old version. The new version will be a Tempfile with the thumb_rotated_small prefix.
+(cm/with-temp file
+  :thumb-rotated-small
+  [[:resize "250x200>"]
+   [:rotate "-90"]
+   [:flip]])
+
+; Convert a file -- keeping the old version. The new version will be a file with the thumb_rotated_small prefix and saved in the same directory as the previous file.
 (cm/with-copy file
   :thumb-rotated-small
   [[:resize "250x200>"]
