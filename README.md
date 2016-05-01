@@ -36,15 +36,12 @@ Why is it better than using shell command interface of imagemagic directly?
    [:flip]])
 
 ; Convert a file with multiple outputs (will always keep the old version). The new version will have the prefix specified as the name of the version.
-(cm/with-copy
-  file
-  (cm/version
-    :thumb-rotated-small
-    [[:resize "100x100"]
-     [:rotate "-90"]])
-  (cm/version
-    :thumb-big
-    [[:resize "250x250"]]))
+(cm/with-copy file
+  {:version :thumb-rotated-small
+   :operators [[:resize "100x100"]
+               [:rotate "-90"]]
+  {:version :thumb-big
+   :operators [[:resize "250x250"]]})
 ```
 
 ## Roadmap
