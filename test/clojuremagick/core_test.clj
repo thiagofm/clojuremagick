@@ -22,7 +22,6 @@
 
 
 ;
-(with-state-changes [(before :facts (do (def rose-temp-file (java.io.File/createTempFile "temp_rose" ".jpg")) ; todo: improve this!
-                                        (clojure.java.io/copy (clojure.java.io/file (resources-path "rose_full.jpg")) rose-temp-file)))]
-  (facts "about with-copy"
-         (cm/with-copy (.toString rose-temp-file) :thumb-rotated-small [[:resize "100x100"]]) => (filesize-matches? (clojure.java.io/file (resources-path "rose_thumb.jpg")))))
+(facts "about with-tempfile"
+       (cm/with-tempfile (resources-path "rose_full.jpg") :thumb [[:resize "100x100"]]) => (filesize-matches? (clojure.java.io/file (resources-path "rose_thumb.jpg")))
+       (cm/with-tempfile (resources-path "rose_full.jpg") :thumb [[:resize "100x100"]]) => (file-base-name-matches? "thumb_rose_full"))
