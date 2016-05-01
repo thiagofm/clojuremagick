@@ -18,10 +18,11 @@
   (facts "about with-file"
          (cm/with-file rose-temp-file [[:resize "100x100"]]) => (filesize-matches? (clojure.java.io/file (resources-path "rose_thumb.jpg")))))
 
-
-
-
-;
 (facts "about with-tempfile"
        (cm/with-tempfile (resources-path "rose_full.jpg") :thumb [[:resize "100x100"]]) => (filesize-matches? (clojure.java.io/file (resources-path "rose_thumb.jpg")))
        (cm/with-tempfile (resources-path "rose_full.jpg") :thumb [[:resize "100x100"]]) => (file-base-name-matches? "thumb_rose_full"))
+
+(facts "about with-copy"
+       ; TODO: clean up file thumb_rose_full.jpg
+       ; TODO: rename file rose_full to rose(makes more sense, what is "full" supposed to mean? ;P)
+       (cm/with-copy (resources-path "rose_full.jpg") :thumb [[:resize "100x100"]]) => (file-path-matches? (resources-path "rose_full.jpg")))
