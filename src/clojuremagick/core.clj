@@ -19,13 +19,13 @@
 
 (defn with-tempfile
   [file-arg file-prefix command-vec]
-  (let [; TODO: extract most of those defs to functions inside file.clj
-        file-fullpath (.toString file-arg)
+  (let [file-fullpath (.toString file-arg)
         file-base-name (org.apache.commons.io.FilenameUtils/getBaseName file-fullpath)
         file-extension (org.apache.commons.io.FilenameUtils/getExtension file-fullpath)
         new-filename (str (name file-prefix) "_" file-base-name)
         temp-file (java.io.File/createTempFile new-filename (str "." file-extension))
         temp-file-path (.toString temp-file)]
+
     ; Use a tempfile instead of the real file
     (clojure.java.io/copy (clojure.java.io/file file-fullpath) temp-file)
 
