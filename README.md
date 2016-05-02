@@ -17,29 +17,27 @@ Why is it better than using shell command interface of imagemagic directly?
 ```clojure
 ; Convert a single file -- WARNING: the file will be overriden
 (cm/with-file file ; Either file path or clojure.java.io/File / java.io.File
-  [[:resize "250x200>"]
-   [:rotate "-90"]
-   [:flip]])
+  {:version :thumb-rotated-small
+   :operators [[:resize "100x100"]
+               [:rotate "-90"]]})
    
-; Convert a file -- keeping the old version. The new version will be a Tempfile with the thumb_rotated_small prefix.
+; Convert a file -- keeping the old version. The new version will be a TempFile with the thumb_rotated_small prefix.
 (cm/with-temp file
-  :thumb-rotated-small
-  [[:resize "250x200>"]
-   [:rotate "-90"]
-   [:flip]])
+  {:version :thumb-rotated-small
+   :operators [[:resize "100x100"]
+               [:rotate "-90"]]})
 
 ; Convert a file -- keeping the old version. The new version will be a file with the thumb_rotated_small prefix and saved in the same directory as the previous file.
 (cm/with-copy file
-  :thumb-rotated-small
-  [[:resize "250x200>"]
-   [:rotate "-90"]
-   [:flip]])
+  {:version :thumb-rotated-small
+   :operators [[:resize "100x100"]
+               [:rotate "-90"]]})
 
 ; Convert a file with multiple outputs (will always keep the old version). The new version will have the prefix specified as the name of the version.
 (cm/with-copy file
   {:version :thumb-rotated-small
    :operators [[:resize "100x100"]
-               [:rotate "-90"]]
+               [:rotate "-90"]]}
   {:version :thumb-big
    :operators [[:resize "250x250"]]})
 ```
