@@ -5,4 +5,5 @@
 
 (facts "about vec->shell-vec"
        (command/vec->shell-vec [[:resize "50%"]]) => ["-resize" "50%"]
-       (command/vec->shell-vec [[:flip]]) => ["-flip"])
+       (command/vec->shell-vec [[:flip]]) => ["-flip"]
+       (command/vec->shell-vec [[:wat?]]) => (throws Exception))
