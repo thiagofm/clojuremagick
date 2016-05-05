@@ -13,6 +13,7 @@
                        option (str "-" (name k))
                        value v]
                    (when (not (contains? valid-options k))
-                       (throw (Exception. "Option doesn't exist.")))
+                     (throw (ex-info "The specified command from Imagemagick is invalid."
+                              {:command k})))
                    (remove nil? [option value])))
                command-vec))))
