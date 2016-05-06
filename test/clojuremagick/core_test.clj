@@ -24,8 +24,12 @@
          (cm/with-file rose-temp-file thumb-resize-vec) => (filesize-matches? (clojure.java.io/file (resources-path "thumb_rose.jpg")))))
 
 (facts "about with-tempfile"
-       (cm/with-tempfile rose-path :thumb thumb-resize-vec) => (filesize-matches? (clojure.java.io/file (resources-path "thumb_rose.jpg")))
-       (cm/with-tempfile rose-path :thumb thumb-resize-vec) => (file-base-name-matches? "thumb_rose"))
+       (cm/with-tempfile rose-path
+         {:version :thumb :operators thumb-resize-vec}) => (filesize-matches? (clojure.java.io/file (resources-path "thumb_rose.jpg")))
+
+       (cm/with-tempfile rose-path
+         {:version :thumb :operators thumb-resize-vec}) => (file-base-name-matches? "thumb_rose"))
 
 (facts "about with-copy"
-       (cm/with-copy rose-path :thumb thumb-resize-vec) => (file-path-matches? rose-path))
+       (cm/with-copy rose-path
+         {:version :thumb :operators thumb-resize-vec}) => (file-path-matches? rose-path))

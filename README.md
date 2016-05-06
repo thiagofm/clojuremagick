@@ -17,9 +17,8 @@ Why is it better than using shell command interface of imagemagic directly?
 ```clojure
 ; Convert a single file -- WARNING: the file will be overriden
 (cm/with-file file ; Either file path or clojure.java.io/File / java.io.File
-  {:version :thumb-rotated-small
-   :operators [[:resize "100x100"]
-               [:rotate "-90"]]})
+              [[:resize "100x100"]
+               [:rotate "-90"]])
    
 ; Convert a file -- keeping the old version. The new version will be a TempFile with the thumb_rotated_small prefix.
 (cm/with-temp file
