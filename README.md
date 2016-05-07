@@ -43,7 +43,10 @@ Why is it better than using shell command interface of imagemagic directly?
 
 ## Roadmap
 
-- Basic functionality: load image, call commands over it
+- Refactor with-temp, it's not needed to create a custom name for the TempFile
+- Concurrent version of with-copy(maybe all of them?)
+- Test more kinds of operations
+- Handle ImageTragick nicely (perhaps write a lib to handle it)
 - Proper docs
 - Compatibility with GraphicsMagick
 - Study the possibility of doing convertions concurrently for multiple versions
