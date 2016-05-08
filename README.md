@@ -43,7 +43,6 @@ Why is it better than using shell command interface of imagemagic directly?
 
 ## Roadmap
 
-- Refactor with-temp, it's not needed to create a custom name for the TempFile
 - Concurrent version of with-copy(maybe all of them?)
 - Test more kinds of operations
 - Handle ImageTragick nicely (perhaps write a lib to handle it)
