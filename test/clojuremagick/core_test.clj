@@ -28,7 +28,7 @@
          {:version :thumb :operators thumb-resize-vec}) => (filesize-matches? (clojure.java.io/file (resources-path "thumb_rose.jpg")))
 
        (cm/with-tempfile rose-path
-         {:version :thumb :operators thumb-resize-vec}) => (file-base-name-matches? "thumb_rose"))
+         {:version :thumb :operators thumb-resize-vec}) => (file-base-name-matches? "rose.jpg"))
 
 (facts "about with-copy"
        (cm/with-copy rose-path

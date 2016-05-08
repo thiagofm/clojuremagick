@@ -2,6 +2,9 @@
   (:require [me.raynes.conch :refer [programs with-programs let-programs] :as sh]
             [clojuremagick.command :as command]))
 
+(defn- copy-file [source-path dest-path]
+  (clojure.java.io/copy (clojure.java.io/file source-path) (clojure.java.io/file dest-path)))
+
 (defn with-file
   "Given a file path and a vector command, runs the command in the file and returns a file with the new version"
   [file-arg command-vec]
@@ -21,20 +24,14 @@
   [file-arg options]
   (let [{:keys [version operators]} options
         file-fullpath (.toString file-arg)
-        file-base-name (org.apache.commons.io.FilenameUtils/getBaseName file-fullpath)
-        file-extension (org.apache.commons.io.FilenameUtils/getExtension file-fullpath)
-        new-filename (str (name version) "_" file-base-name)
-        temp-file (java.io.File/createTempFile new-filename (str "." file-extension))
+        temp-file-name (org.apache.commons.io.FilenameUtils/getName file-fullpath)
+        temp-file (java.io.File/createTempFile temp-file-name nil)
         temp-file-path (.toString temp-file)]
 
     ; Use a tempfile instead of the real file
-    (clojure.java.io/copy (clojure.java.io/file file-fullpath) temp-file)
+    (copy-file file-fullpath temp-file-path)
 
     (with-file temp-file-path operators)))
-
-; TODO: remove this and all the file handling here, perhaps use Raynes/fs
-(defn- copy-file [source-path dest-path]
-  (clojure.java.io/copy (clojure.java.io/file source-path) (clojure.java.io/file dest-path)))
 
 (defn with-copy
   [file-arg options]
