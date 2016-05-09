@@ -33,3 +33,10 @@
 (facts "about with-copy"
        (cm/with-copy rose-path
          {:version :thumb :operators thumb-resize-vec}) => (file-path-matches? rose-path))
+
+(facts "with varied options"
+       (cm/with-copy rose-path
+         {:version :thumb :operators [[:resize "100x100"]
+                                      [:rotate "-37"]
+                                      [:auto-orient]
+                                      [:scale "10"]]}) => (file-path-matches? rose-path))
