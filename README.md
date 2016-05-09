@@ -43,6 +43,7 @@ Why is it better than using shell command interface of imagemagic directly?
 
 ## Roadmap
 
+- Parse error messages comming from command line in nice exceptions
 - Concurrent version of with-copy(maybe all of them?)
 - Test more kinds of operations
 - Handle ImageTragick nicely (perhaps write a lib to handle it)
