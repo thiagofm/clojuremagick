@@ -1,6 +1,8 @@
 (ns clojuremagick.core
   (:require [me.raynes.conch :refer [programs with-programs let-programs] :as sh]
-            [clojuremagick.command :as command]))
+            [clojuremagick.command :as command])
+  (:import (org.apache.commons.io FilenameUtils)
+           (java.io File)))
 
 (defn- copy-file [source-path dest-path]
   (clojure.java.io/copy (clojure.java.io/file source-path) (clojure.java.io/file dest-path)))
@@ -24,8 +26,8 @@
   [file-arg options]
   (let [{:keys [version operators]} options
         file-fullpath (.toString file-arg)
-        temp-file-name (org.apache.commons.io.FilenameUtils/getName file-fullpath)
-        temp-file (java.io.File/createTempFile temp-file-name nil)
+        temp-file-name (FilenameUtils/getName file-fullpath)
+        temp-file (File/createTempFile temp-file-name nil)
         temp-file-path (.toString temp-file)]
 
     ; Use a tempfile instead of the real file
@@ -38,9 +40,9 @@
   (let [{:keys [version operators]} options
         temp-file (with-tempfile file-arg options)
         file-fullpath (.toString file-arg)
-        file-base-name (org.apache.commons.io.FilenameUtils/getBaseName file-fullpath)
-        file-extension (org.apache.commons.io.FilenameUtils/getExtension file-fullpath)
-        file-path (org.apache.commons.io.FilenameUtils/getPath file-fullpath)
+        file-base-name (FilenameUtils/getBaseName file-fullpath)
+        file-extension (FilenameUtils/getExtension file-fullpath)
+        file-path (FilenameUtils/getPath file-fullpath)
         new-filename (str (name version) "_" file-base-name)
         new-extension (str "." file-extension)
         new-full-filename (str new-filename new-extension)

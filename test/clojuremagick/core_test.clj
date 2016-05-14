@@ -1,6 +1,7 @@
 (ns clojuremagick.core-test
   (:require [clojuremagick.core :as cm]
             [midje.sweet :as midje])
+  (:import (java.io File))
   (:use clojuremagick.support.checkers)
   (:use clojuremagick.support.utils)
   (:use midje.sweet))
@@ -8,7 +9,7 @@
 (def rose-path (resources-path "rose.jpg"))
 (def thumb-resize-vec [[:resize "100x100"]])
 (def thumb-rose-file (clojure.java.io/file (resources-path "thumb_rose.jpg")))
-(def rose-temp-file (java.io.File/createTempFile "temp_rose" ".jpg"))
+(def rose-temp-file (File/createTempFile "temp_rose" ".jpg"))
 
 (with-state-changes
   [(before :facts
