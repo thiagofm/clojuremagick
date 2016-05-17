@@ -31,6 +31,9 @@
          {:version :thumb :operators thumb-resize-vec})  => (file-base-name-matches? "thumb_rose")
 
        (cm/with-copy rose-path
+         {:version :thumb :operators [[:scale]]}) => (throws clojure.lang.ExceptionInfo)
+
+       (cm/with-copy rose-path
          {:version :thumb :operators thumb-resize-vec}) => (file-path-matches? rose-path)
 
        (cm/with-copy rose-path

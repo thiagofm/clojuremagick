@@ -1,6 +1,7 @@
 (ns clojuremagick.core
   (:require [me.raynes.conch :refer [programs with-programs let-programs] :as sh]
-            [clojuremagick.command :as command])
+            [clojuremagick.command :as command]
+            [clojuremagick.parser :as parser])
   (:import (org.apache.commons.io FilenameUtils)
            (java.io File)))
 
@@ -17,10 +18,11 @@
         shell-args (conj shell file-fullpath)]
 
     ; Run shell command
-    (apply mogrify shell-args)
-
-    ; Return file
-    (clojure.java.io/file file-fullpath)))
+    (try (do (apply mogrify shell-args)
+             (clojure.java.io/file file-fullpath))
+         (catch Exception e
+           (let [error-map (ex-data e)]
+             (parser/mogrify-error error-map))))))
 
 (defn with-tempfile
   [file-arg options]
