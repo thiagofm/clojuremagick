@@ -8,4 +8,5 @@
    :stderr "mogrify: invalid argument for option `/var/folders/22/2hspcg_n5xv7lb8lv2jrnyfm0000gn/T/rose.jpg1251614767804617693.tmp': -scale @ error/mogrify.c/MogrifyImageCommand/5881.\n"})
 
 (facts "about mogrify-error"
-       (mogrify-error missing-argument-mogrify-error) => missing-argument-mogrify-error)
+       (parser/mogrify-error missing-argument-mogrify-error) => (:err (:proc missing-argument-mogrify-error)))
+;

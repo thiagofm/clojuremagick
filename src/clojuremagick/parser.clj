@@ -2,4 +2,5 @@
 
 (defn mogrify-error
   [error-map]
-  error-map)
+  (let [err (-> error-map :proc :err)]
+    err))
